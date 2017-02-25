@@ -28,6 +28,7 @@ class Data extends MY_Controller
 
     public function reports()
     {
+         
 
         $template = 'admin/report';
 

@@ -33,7 +33,7 @@
                 // ]);
 
                 build_menu([
-                    ['Report', 'data/Reports'],
+                    ['Report', 'report/index'],
                     ['Storage', 'data/storage'],
                     ['Records', 'data/records'],
                     ['Potatoes', 'data/potatoes'],
