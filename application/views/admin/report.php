@@ -6,20 +6,20 @@
 					<table class="table table-condensed">
 						<tr>
 							<th>Total Bags</th>
-							<th>Chamber No</th>
+							<th>Chamber</th>
 							<th>Potato Name</th>
 							<th>Dispatch</th>
 							<th>Stacker</th>
 							<th>Owner</th>
-							<th>Customer No</th>
-							<th>Potato Condition</th>
+							<th>#Contact</th>
+							<th>Condition</th>
 						</tr>
 				  <?php $total_bags = 0; foreach ($data as $key => $record): 
 				   	$total_bags = $total_bags + $record['bags'];
 				  ?>
 				  	<tr class="<?=$record['dispatch'] ? 'danger' : '' ?>">
-				  		<td><?=$record['bags']?></td>
-				  		<td><?=$record['chamber']?></td>
+				  		<td width="10%"><?=$record['bags']?></td>
+				  		<td width="10%"><?=$record['chamber']?></td>
 				  		<td><?=$record['name']?></td>
 				  		<td><?=$record['dispatch'] ? $record['dispatch'] : 0?></td>
 				  		<td><?=$record['Stacker']?></td>
