@@ -1,0 +1,5 @@
+[26-Dec-2016 06:09:45 America/Denver] PHP Fatal error:  Class 'Capsule' not found in /home1/desktopi/public_html/softy/application/config/database.php on line 201
+[26-Dec-2016 06:14:09 America/Denver] PHP Fatal error:  Call to a member function num_rows() on boolean in /home1/desktopi/public_html/softy/application/models/tank_auth/Users.php on line 71
+[10-Jan-2017 09:32:18 America/Denver] PHP Fatal error:  Call to a member function result() on boolean in /home1/desktopi/public_html/softy/application/models/Grocery_crud_model.php on line 87
+[16-Jan-2017 02:50:33 America/Denver] PHP Fatal error:  Call to a member function result() on boolean in /home1/desktopi/public_html/softy/application/models/Grocery_crud_model.php on line 87
+[16-Jan-2017 02:57:03 America/Denver] PHP Fatal error:  Call to a member function result() on boolean in /home1/desktopi/public_html/softy/application/models/Grocery_crud_model.php on line 87
