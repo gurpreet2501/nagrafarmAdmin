@@ -7,7 +7,7 @@ class Data extends MY_Controller
     }
 
     public function products()
-    {
+    { 
         $crud = $this->crud_init('products', ['name', 'price','stock']);
         $crud->field_type('created_at','hidden',date('Y-m-d H:i:s'));
         $crud->field_type('updated_at','hidden');
