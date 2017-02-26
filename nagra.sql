@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 26, 2017 at 11:50 AM
+-- Generation Time: Feb 26, 2017 at 12:44 PM
 -- Server version: 10.1.9-MariaDB
 -- PHP Version: 5.6.15
 
@@ -40,6 +40,25 @@ CREATE TABLE `admin` (
 
 INSERT INTO `admin` (`id`, `username`, `password`, `type`, `email`) VALUES
 (1, 'admin', 'e10adc3949ba59abbe56e057f20f883e', 'superadmin', 'bikramjit1988@gmail.com');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `brands`
+--
+
+CREATE TABLE `brands` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `brand_name` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `brands`
+--
+
+INSERT INTO `brands` (`id`, `brand_name`) VALUES
+(1, 'NAC'),
+(2, 'FARMER');
 
 -- --------------------------------------------------------
 
@@ -135,7 +154,6 @@ INSERT INTO `phinxlog` (`version`, `migration_name`, `start_time`, `end_time`, `
 CREATE TABLE `potatoes` (
   `id` int(12) NOT NULL,
   `name` varchar(255) NOT NULL,
-  `active` tinyint(1) NOT NULL,
   `date` varchar(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -143,14 +161,15 @@ CREATE TABLE `potatoes` (
 -- Dumping data for table `potatoes`
 --
 
-INSERT INTO `potatoes` (`id`, `name`, `active`, `date`) VALUES
-(3, 'Kufri pukhraj', 0, '2016-01-01 11:13:18'),
-(4, 'Kufri Jyoti', 0, '2016-01-01 11:36:17'),
-(5, 'Badshah', 0, '2016-01-01 11:36:26'),
-(6, 'S-1', 0, '2016-01-01 11:36:33'),
-(7, 'S-6', 0, '2016-01-01 11:36:37'),
-(8, 'Chandermukhi', 0, '2016-01-01 11:36:56'),
-(9, '2708', 0, '2016-01-01 11:37:03');
+INSERT INTO `potatoes` (`id`, `name`, `date`) VALUES
+(3, 'Kufri pukhraj', '2017-02-26'),
+(4, 'Kufri Jyoti', '2017-02-26'),
+(5, 'Badshah', '2017-02-26'),
+(6, 'S-1', '2017-02-26'),
+(7, 'S-6', '2017-02-26'),
+(8, 'Chandermukhi', '2017-02-26'),
+(9, '2708', '2017-02-26'),
+(10, 'tewst', '2017-02-26');
 
 -- --------------------------------------------------------
 
@@ -244,7 +263,7 @@ CREATE TABLE `storage` (
 --
 
 INSERT INTO `storage` (`id`, `invoice_no`, `potato_type`, `bags`, `chamber`, `level`, `lot`, `date`, `brand`, `logo`, `owner`, `location`, `created_at`, `updated_at`) VALUES
-(17, '17', '5', '1000', '4', '2', '15', '2017-02-26', 'Test', 'c420c-img_212477.jpg', 'Raghubir Singh', 'Vencover,', '2017-02-26 11:27:16', '2017-02-26 11:27:30');
+(17, '17', '5', '1000', '4', '2', '15', '2017-02-26', '2', 'c420c-img_212477.jpg', 'Raghubir Singh', 'Vencover,', '2017-02-26 11:55:06', '2017-02-26 11:55:12');
 
 -- --------------------------------------------------------
 
@@ -1125,6 +1144,12 @@ ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `brands`
+--
+ALTER TABLE `brands`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `buyer_records`
 --
 ALTER TABLE `buyer_records`
@@ -1202,6 +1227,11 @@ ALTER TABLE `user_sessions`
 ALTER TABLE `admin`
   MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
+-- AUTO_INCREMENT for table `brands`
+--
+ALTER TABLE `brands`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
 -- AUTO_INCREMENT for table `buyer_records`
 --
 ALTER TABLE `buyer_records`
@@ -1215,7 +1245,7 @@ ALTER TABLE `dispatch`
 -- AUTO_INCREMENT for table `potatoes`
 --
 ALTER TABLE `potatoes`
-  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `records`
 --

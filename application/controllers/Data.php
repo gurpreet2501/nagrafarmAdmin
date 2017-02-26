@@ -22,7 +22,7 @@ class Data extends MY_Controller
     {
         $crud = $this->crud_init('records', []);
         // $crud->field_type('created_at','hidden',date('Y-m-d H:i:s'));
-        // $crud->field_type('updated_at','hidden');
+        $crud->field_type('data','hidden','');
         $this->view_crud($crud->render(), 'Add Record');
     }
 
@@ -41,7 +41,7 @@ class Data extends MY_Controller
     {
         $crud = $this->crud_init('potatoes', []);
         // $crud->field_type('created_at','hidden',date('Y-m-d H:i:s'));
-        // $crud->field_type('updated_at','hidden');
+        $crud->field_type('date','hidden', date('Y-m-d'));
         $this->view_crud($crud->render(), 'Add Potato Variety');
     }
 
@@ -78,6 +78,7 @@ class Data extends MY_Controller
             ['invoice_no','potato_type','bags','chamber','level','lot','brand','logo','date','owner','location']);
 
         $crud->set_relation('potato_type','potatoes','name');
+        $crud->set_relation('brand','brands','brand_name');
         // $crud->set_relation('record_id','records',"Invoice No :{invoice_no}, Owner Name: {owner_name}, Phone: {phone}, Date: {date}");
         $crud->set_field_upload('logo','assets/uploads/files');
         $crud->callback_after_insert(array($this, 'updateInvoiceNo'));
