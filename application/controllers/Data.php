@@ -74,9 +74,17 @@ class Data extends MY_Controller
         $crud = $this->crud_init('storage', []);
         // $crud->set_relation('potato_type','products','name');
         // $crud->set_relation('record_id','records',"Invoice No :{invoice_no}, Owner Name: {owner_name}, Phone: {phone}, Date: {date}");
+        $crud->callback_after_insert(array($this, 'updateInvoiceNo'));
+        $crud->callback_after_update(array($this, 'updateInvoiceNo'));
         // $crud->field_type('created_at','hidden',date('Y-m-d H:i:s'));
-        // $crud->field_type('updated_at','hidden');
+        $crud->field_type('invoice_no','hidden');
         $this->view_crud($crud->render(), 'Add Storage Details');
+    }
+
+    function updateInvoiceNo($post_array,$primary_key){
+        
+        Models\Storage::where('id',$primary_key)->update(['invoice_no' => $primary_key]);
+        return true;
     }
 
     public function countries()
