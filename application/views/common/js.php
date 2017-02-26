@@ -14,7 +14,7 @@
 <script src="<?=base_url('assets/grocery_crud/js/jquery_plugins/jquery.fancybox-1.3.4.js')?>"></script>
 <script src="<?=base_url('assets/js/init-fancybox.js')?>"></script>
 <script src="<?=base_url('assets/js/get_technicians_of_pro.js')?>"></script>
-	
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>	
 <?php
 	if(!empty($js_files)):	
 	 foreach($js_files as $file): ?>
@@ -24,3 +24,11 @@
 
 <script src="<?=base_url('assets/admin/canvas/js/libs/bootstrap.min.js')?>"></script>
 <script src="<?=base_url('assets/admin/canvas/js/App.js')?>"></script>
+ <script>
+  $( function() {
+    $( ".datepicker" ).datepicker({
+      changeMonth: true,
+      changeYear: true
+    });
+  } );
+  </script>
