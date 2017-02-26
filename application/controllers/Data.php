@@ -73,10 +73,11 @@ class Data extends MY_Controller
     }
 
     public function storage()
-    {
+    {   
+        //Potato type is potato variety
         $crud = $this->crud_init('storage', 
-            ['invoice_no','potato_type','bags','chamber','level','lot','brand','logo','date','owner','location']);
-
+            ['date','invoice_no','owner','brand','logo','location','replacement','potato_type','bags']);
+        $crud->fields('date','invoice_no','owner','brand','logo','location','replacement','potato_type','bags');
         $crud->set_relation('potato_type','potatoes','name');
         $crud->set_relation('brand','brands','brand_name');
         // $crud->set_relation('record_id','records',"Invoice No :{invoice_no}, Owner Name: {owner_name}, Phone: {phone}, Date: {date}");
