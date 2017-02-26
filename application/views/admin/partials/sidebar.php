@@ -27,21 +27,18 @@
                  //    ['Add Countries', 'data/countries'],
                  // ]);
 
-                // build_dropdown_menu('Warranty Plans', 'fa fa-table', [
-                //     ['Combined Plans', 'data/combined_plans'],
-                //     ['Simple Plans', 'data/simple_plans']
-                // ]);
-
                 build_menu([
-                    ['Report', 'report/index'],
                     ['Storage', 'data/storage'],
                     ['Records', 'data/records'],
-                    ['Potatoes', 'data/potatoes'],
-                    ['Seller Records', 'data/seller_records'],
-                    ['Buyer Records', 'data/buyer_records'],  
                     ['Dispatch', 'data/dispatches'],
+                    ['Report', 'report/index'],
                     // ['Add Customers', 'data/customers'],
                     // ['Dispatch Items', 'data/dispatch_items'],
+                ]);
+
+                build_dropdown_menu('Info', 'fa fa-table', [
+                    ['Add Potato Variety', 'data/potatoes'],
+                    ['Add Brand', 'data/brands']
                 ]);
             ?>
 		</ul>

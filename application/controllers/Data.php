@@ -42,7 +42,7 @@ class Data extends MY_Controller
         $crud = $this->crud_init('potatoes', []);
         // $crud->field_type('created_at','hidden',date('Y-m-d H:i:s'));
         // $crud->field_type('updated_at','hidden');
-        $this->view_crud($crud->render(), 'Add Potatoes Record');
+        $this->view_crud($crud->render(), 'Add Potato Variety');
     }
 
     public function	seller_records()
@@ -64,19 +64,27 @@ class Data extends MY_Controller
     public function	dispatches()
     {
         $crud = $this->crud_init('dispatch', []);
-        // $crud->field_type('created_at','hidden',date('Y-m-d H:i:s'));
-        // $crud->field_type('updated_at','hidden');
+        $crud->set_relation('storage_id','storage','invoice_no');
+        $crud->display_as('storage_id','Invoice');
+        $crud->display_as('dname','Driver Name');
+        $crud->display_as('dnumber','Driver Contact');
+        $crud->field_type('date','hidden',date('Y-m-d H:i:s'));
         $this->view_crud($crud->render(), 'Add Dispatch');
     }
 
     public function storage()
     {
-        $crud = $this->crud_init('storage', []);
-        // $crud->set_relation('potato_type','products','name');
+        $crud = $this->crud_init('storage', 
+            ['invoice_no','potato_type','bags','chamber','level','lot','brand','logo','date','owner','location']);
+
+        $crud->set_relation('potato_type','potatoes','name');
         // $crud->set_relation('record_id','records',"Invoice No :{invoice_no}, Owner Name: {owner_name}, Phone: {phone}, Date: {date}");
+        $crud->set_field_upload('logo','assets/uploads/files');
         $crud->callback_after_insert(array($this, 'updateInvoiceNo'));
         $crud->callback_after_update(array($this, 'updateInvoiceNo'));
-        // $crud->field_type('created_at','hidden',date('Y-m-d H:i:s'));
+        $crud->field_type('created_at','hidden',date('Y-m-d H:i:s'));
+        $crud->display_as('potato_type','Potato Variety');
+        $crud->field_type('updated_at','hidden',date('Y-m-d H:i:s'));
         $crud->field_type('invoice_no','hidden');
         $this->view_crud($crud->render(), 'Add Storage Details');
     }
