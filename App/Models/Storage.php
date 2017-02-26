@@ -18,7 +18,14 @@ class Storage extends Eloquent{
 	'year',
 	'date',
 	'brand',
-	'logo'
+	'logo',
+	'owner',
+	'location',
+	'replacement',
+	'ration',
+	'seed',
+	'goli',
+	'cut'
 	];
     
 }

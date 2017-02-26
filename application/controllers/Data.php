@@ -76,8 +76,8 @@ class Data extends MY_Controller
     {   
         //Potato type is potato variety
         $crud = $this->crud_init('storage', 
-            ['date','invoice_no','owner','brand','logo','location','replacement','potato_type','bags']);
-        $crud->fields('date','invoice_no','owner','brand','logo','location','replacement','potato_type','bags');
+            ['date','invoice_no','owner','brand','logo','location','replacement','potato_type','ration','seed','goli','cut','bags']);
+        $crud->fields('date','invoice_no','owner','brand','logo','location','replacement','potato_type','ration','seed','goli','cut','bags');
         $crud->set_relation('potato_type','potatoes','name');
         $crud->set_relation('brand','brands','brand_name');
         // $crud->set_relation('record_id','records',"Invoice No :{invoice_no}, Owner Name: {owner_name}, Phone: {phone}, Date: {date}");
@@ -86,6 +86,11 @@ class Data extends MY_Controller
         $crud->callback_after_update(array($this, 'updateInvoiceNo'));
         $crud->field_type('created_at','hidden',date('Y-m-d H:i:s'));
         $crud->display_as('potato_type','Potato Variety');
+        $crud->display_as('ration','R-Ration');
+        $crud->display_as('seed','S-Seed');
+        $crud->display_as('goli','G-Goli');
+        $crud->display_as('bags','Total');
+        $crud->display_as('cut','C-Cut');
         $crud->field_type('updated_at','hidden',date('Y-m-d H:i:s'));
         $crud->field_type('invoice_no','hidden');
         $this->view_crud($crud->render(), 'Add Storage Details');
