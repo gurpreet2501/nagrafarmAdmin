@@ -29,8 +29,8 @@
 
                 build_menu([
                     ['Storage', 'data/storage'],
+                    ['Dispatch', 'data/dispatches'],
                     // ['Records', 'data/records'],
-                    // ['Dispatch', 'data/dispatches'],
                     // ['Report', 'report/index'],
                     // ['Add Customers', 'data/customers'],
                     // ['Dispatch Items', 'data/dispatch_items'],

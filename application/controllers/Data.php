@@ -64,20 +64,69 @@ class Data extends MY_Controller
     public function	dispatches()
     {
         $crud = $this->crud_init('dispatch', []);
-        $crud->set_relation('storage_id','storage','invoice_no');
-        $crud->display_as('storage_id','Invoice');
-        $crud->display_as('dname','Driver Name');
-        $crud->display_as('dnumber','Driver Contact');
+        $crud->set_relation('invoice','storage','invoice_no');
+        $crud->set_lang_string('insert_error','You are trying to dispatch more than the available stock');
         $crud->field_type('date','hidden',date('Y-m-d H:i:s'));
+        $crud->callback_before_insert(array($this,'checkIfStockSufficientToDispatch'));
         $this->view_crud($crud->render(), 'Add Dispatch');
+    }
+
+    function totalDispatch($dispatches){
+      $data = [
+        'ration' => 0,
+        'seed' => 0,
+        'goli' => 0,
+        'no_12' => 0,
+        'cut' => 0
+      ];
+      foreach ($dispatches as $key => $dispatch) {
+        $data['ration'] = $data['ration'] + $dispatch->ration;
+        $data['seed'] = $data['seed'] + $dispatch->seed;
+        $data['goli'] = $data['goli'] + $dispatch->goli;
+        $data['cut'] = $data['cut'] + $dispatch->cut;
+        $data['no_12'] = $data['no_12'] + $dispatch->no_12;
+        
+      }
+      return $data;
+    }
+
+    function calculateAvailableStock($storage,$dispatches){
+      $stock = [];
+      $keys = ['ration','goli','no_12','cut','seed'];
+      foreach ($keys as $key => $val) {
+        $stock[$val] = $storage[$val] - $dispatches[$val];
+      }
+
+     return $stock;
+    }
+
+    function checkIfStockSufficientToDispatch($post_array){
+        $crud = $this->crud_init('dispatch', []);
+        $storage = Models\Storage::select('ration','no_12','goli','cut','seed')->where('invoice_no',$post_array['invoice'])->first();
+        $allDispatches = Models\Dispatch::select('ration','no_12','goli','cut','seed')->where('invoice',$post_array['invoice'])->get();
+
+        $totalDispatch = $this->totalDispatch($allDispatches);
+        $stockAvailable = $this->calculateAvailableStock($storage,$totalDispatch);
+        $keys = ['ration','goli','no_12','cut','seed'];
+        
+        
+        foreach ($keys as $key => $val) {
+          if($post_array[$val] > $stockAvailable[$val])
+            {
+              return false;
+            }
+        }
+
+        return true;
+
     }
 
     public function storage()
     {   
         //Potato type is potato variety
         $crud = $this->crud_init('storage', 
-            ['date','invoice_no','owner','brand','logo','location','replacement','potato_type','ration','seed','goli','cut','bags']);
-        $crud->fields('date','invoice_no','owner','brand','logo','location','replacement','potato_type','ration','seed','goli','cut','bags');
+            ['date','invoice_no','owner','brand','logo','location','replacement','potato_type','ration','seed','goli','no_12','cut','bags']);
+        $crud->fields('date','invoice_no','owner','brand','logo','location','replacement','potato_type','ration','seed','goli','no_12','cut','bags');
         $crud->set_relation('potato_type','potatoes','name');
         $crud->set_relation('brand','brands','brand_name');
         // $crud->set_relation('record_id','records',"Invoice No :{invoice_no}, Owner Name: {owner_name}, Phone: {phone}, Date: {date}");
